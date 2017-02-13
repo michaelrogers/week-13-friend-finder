@@ -81,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
         req.send(requestData);
     };
 
+   
+
     //Handle click events
     document.querySelector('button[type=submit]').addEventListener('click', (event) => {
         event.preventDefault();
@@ -88,14 +90,25 @@ document.addEventListener('DOMContentLoaded', () => {
         questionRangeArray.map((question) => {
             scoreArray.push(question.value);
         });
-        let dataObject = new Friend('Test', 'URL', scoreArray);
-        console.log(dataObject)
-        ajaxRequest(
-            "/api/friends", JSON.stringify(dataObject), (req) => {
-            console.log(JSON.parse(req.responseText));
-        }, "POST");
-        
-        
+        let userName = document.querySelector('input[name=userName]').value.trim();
+        let userPhoto = document.querySelector('input[name=userImage]').value.trim();
+        if (userName && userPhoto && scoreArray.length > 0) {
+            let userProfile = new Friend(userName, userPhoto, scoreArray);
+            ajaxRequest(
+                "/api/friends", JSON.stringify(userProfile), (req) => {
+                //Populate user profile
+                document.querySelector('#userProfile h3.h3').textContent = userProfile.name;
+                document.querySelector('#userProfile img.img-responsive').src = userProfile.photo;
+
+                //Populate match profile
+                let parsedResponse = JSON.parse(req.responseText);
+                document.querySelector('#matchProfile h3.h3').textContent = parsedResponse.friendObject.name;
+                document.querySelector('#matchProfile img.img-responsive').src = parsedResponse.friendObject.photo;
+
+                $('#modal-match').modal('show');
+                console.log(parsedResponse);
+            }, "POST");
+        } else alert ("Please complete the entire form");
     });
 
 

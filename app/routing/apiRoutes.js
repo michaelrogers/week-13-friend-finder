@@ -9,7 +9,6 @@ module.exports = (app) => {
     app.post('/api/friends', (req, res) => {
         let parsedRequestData = JSON.parse(req.body);
         
-
         const differenceCount = (userInputArray, friendArray) => {
             let count = 0;
             userInputArray.map((question, index) => {
@@ -26,29 +25,16 @@ module.exports = (app) => {
         let difference = null;
         friendData.map((friend) => {
             difference = differenceCount(parsedRequestData.scores, friend.scores);
-            console.log(difference)
             if (closestMatch.matchDifference == null ||
-                difference < closestMatch.matchDifference) {
-                    closestMatch.matchDifference = difference;
-                    closestMatch.friendObject = friend;
+                difference < closestMatch.matchDifference
+            ) {
+                closestMatch.matchDifference = difference;
+                closestMatch.friendObject = friend;
             }
         });
-        // for (let i = 0; i < friendData.length; i++) {
-        //     if (closestMatch.matchDifference) {
-
-        //     }
-        //     else {
-        //         closestMatch.matchDifference = 
-        //     }
-
-        // }
-        
-        
-        // console.log(parsedRequestData.photo);
-        // res.send(req.body);
-
-
-
+        //Push user entry into server data
+        friendData.push(parsedRequestData);
+        //Return the closest match to client
         res.json((closestMatch))
 
     });
