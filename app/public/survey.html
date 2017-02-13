@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Survey - Friend Finder</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="h1">Survey Questions</h1>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-8">
+                <h2 class="h2">About You</h2>
+               
+                <div class="form-group">
+                    <label>Your Name (required)</label>
+                    <input type="text" name="name" class="form-control" value="" required="required" placeholder="Type your name">
+                </div>
+                <div class="form-group">
+                    <label>Link to image (required)</label>
+                    <input type="text" name="name" class="form-control" value="" required="required" placeholder="Link to an image file">
+                </div>
+            </div>
+        </div>
+
+        
+        <!--Start questions-->
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="h2">Questions</h2>
+                <hr>
+                <div class="question-container"></div>
+                               
+                <button type="submit" class="btn btn-primary">Submit Survey</button>
+                
+            </div>
+        </div>
+    </div>
+    <!--Include the questionArray for generating the form-->
+    <script type="text/javascript" src="/questions" ></script>
+    <script type="text/javascript" src="survey.js"></script>
+</body>
+</html>
