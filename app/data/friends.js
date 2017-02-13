@@ -14,7 +14,6 @@ const randomizeArray = (questionCount) => {
     return array;
 };
 
-
 module.exports = [
     new Friend('Rachel Green', 'http://vignette4.wikia.nocookie.net/friends/images/3/38/RachelGreen.jpg', randomizeArray(10)),
     new Friend('Phoebe Buffay', 'http://vignette3.wikia.nocookie.net/friends/images/3/30/PhoebeBuffay.jpg', randomizeArray(10)),
