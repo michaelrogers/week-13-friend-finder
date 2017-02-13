@@ -81,7 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
         req.send(requestData);
     };
 
-   
+   const isAlpha = /^[a-zA-Z ]*$/;
+   const isImagePath = /.*?(\/[\/\w\.]+)[\s\?]?.*/;
 
     //Handle click events
     document.querySelector('button[type=submit]').addEventListener('click', (event) => {
@@ -92,7 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         let userName = document.querySelector('input[name=userName]').value.trim();
         let userPhoto = document.querySelector('input[name=userImage]').value.trim();
-        if (userName && userPhoto && scoreArray.length > 0) {
+        if (isAlpha.test(userName) &&
+            isImagePath.test(userPhoto) &&
+            scoreArray.length > 0
+            ) {
             let userProfile = new Friend(userName, userPhoto, scoreArray);
             ajaxRequest(
                 "/api/friends", JSON.stringify(userProfile), (req) => {
@@ -108,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 $('#modal-match').modal('show');
                 console.log(parsedResponse);
             }, "POST");
-        } else alert ("Please complete the entire form");
+        } else alert ("Please complete the entire form and use a valid image.");
     });
 
 
